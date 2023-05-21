@@ -2,9 +2,9 @@ import { useDispatch } from 'react-redux';
 import {
   addService,
   removeService,
-  changeServiceField,
   editService,
-} from '../slices/servicesSlice';
+} from '../slices/serviceListSlice';
+import { changeServiceField } from '../slices/serviceAddSlice';
 
 const useServiceActions = () => {
   const dispatch = useDispatch();

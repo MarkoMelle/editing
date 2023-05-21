@@ -6,7 +6,7 @@ const initialState = [
   { id: 2, name: 'Замена дисплея', price: 25000 },
 ];
 
-const servicesSlice = createSlice({
+const servicesListSlice = createSlice({
   name: 'services',
   initialState,
   reducers: {
@@ -27,13 +27,6 @@ const servicesSlice = createSlice({
     removeService: (state, action) => {
       return state.filter((service) => service.id !== action.payload);
     },
-    changeServiceField: (state, action) => {
-      const { name, value } = action.payload;
-      const existingService = state.find((service) => service.name === name);
-      if (existingService) {
-        existingService.price = value;
-      }
-    },
     editService: (state, action) => {
       const { id, name, price } = action.payload;
       const existingService = state.find((service) => service.id === id);
@@ -45,7 +38,7 @@ const servicesSlice = createSlice({
   },
 });
 
-export const { addService, removeService, changeServiceField, editService } =
-  servicesSlice.actions;
+export const { addService, removeService, editService } =
+  servicesListSlice.actions;
 
-export default servicesSlice.reducer;
+export default servicesListSlice.reducer;

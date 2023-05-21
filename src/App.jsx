@@ -1,24 +1,25 @@
-import React, { useState } from 'react';
+import React from 'react';
 import ServiceAdd from './components/ServiceAdd';
 import ServiceList from './components/ServiceList';
+import { useDispatch, useSelector } from 'react-redux';
+import { setIsEdit, setEditItem, reset } from './slices/serviceAddSlice';
 
 export default function App() {
-  const [item, setItem] = useState({ name: '', price: '' });
-  const [isEdit, setIsEdit] = useState(false);
+  const dispatch = useDispatch();
+  const { isEdit, editItem } = useSelector((state) => state.serviceAdd);
 
   const handleReset = () => {
-    setItem({ name: '', price: '' });
-    setIsEdit(false);
+    dispatch(reset());
   };
 
   const handleEdit = (editItem) => {
-    setItem(editItem);
-    setIsEdit(true);
+    dispatch(setIsEdit(true));
+    dispatch(setEditItem(editItem));
   };
 
   return (
     <>
-      <ServiceAdd value={item} isEdit={isEdit} onReset={handleReset} />
+      <ServiceAdd value={editItem} isEdit={isEdit} onReset={handleReset} />
       <ServiceList onEdit={handleEdit} />
     </>
   );
